@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# -----------------------------------------------
+# Socrata
+# -----------------------------------------------
+
+# Get the list of 4x4s
+./socrata-datasets-download.sh
+./socrata-datasets-viewids.py
+
+# Download metadata
+./socrata-views-download.sh
+
+# Download spreadsheets
+./socrata-rows-download.sh
+
+# -----------------------------------------------
+# Collabfinder
+# -----------------------------------------------
+
+# Download the project pages.
+./collabfinder-project-download.sh
