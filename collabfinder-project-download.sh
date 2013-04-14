@@ -13,8 +13,18 @@ rnorm() {
   ))
 }
 
-dir="collabfinder/$(date --rfc-3339 date)/projects"
+# Directories
+datestamp=$(date --rfc-3339 date)
+dir="collabfinder/${datestamp}/projects"
 mkdir -p "${dir}"
+
+# Symlink
+(
+  cd collabfinder
+  rm -f current
+  ln -s "$datestamp" current
+)
+
 nTries=20
 
 failuresInARow=0
