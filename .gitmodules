@@ -1,0 +1,9 @@
+[submodule "flickr"]
+	path = flickr
+	url = git@github.com:appgen/cache-flickr.git
+[submodule "socrata"]
+	path = socrata
+	url = git@github.com:appgen/cache-socrata.git
+[submodule "collabfinder"]
+	path = collabfinder
+	url = git@github.com:appgen/cache-collabfinder.git
