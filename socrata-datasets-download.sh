@@ -3,10 +3,11 @@ set -e
 
 download_page() {
   [ -z "$1" ] && echo 'You must specify a page number' && return 1
-  wget -O "socrata/datasets/$1" "https://data.cityofnewyork.us/browse?limitTo=datasets&page=$1&sortBy=oldest&view_type=table"
+  file="socrata/datasets/$1"
+  test -f "$file" || wget -O "$file" "https://data.cityofnewyork.us/browse?limitTo=datasets&page=$1&sortBy=oldest&view_type=table"
 }
 
-mkdir -p downloads/datasets
+mkdir -p socrata/datasets
 for page in $(seq 1 80); do
   download_page $page
 done
