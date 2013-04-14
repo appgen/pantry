@@ -2,10 +2,10 @@
 import os
 import lxml.html
 
-DIR = os.path.join('downloads', 'datasets')
+DIR = os.path.join('socrata', 'datasets')
 
 def main():
-    pages = filter(lambda page: '.html' == page[-5:], os.listdir(DIR))
+    pages = filter(lambda page: set(page).issubset(set('0123456789')), os.listdir(DIR))
     viewids = set()
     for page in pages:
         html = lxml.html.parse(os.path.join(DIR, page))

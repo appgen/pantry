@@ -1,10 +1,13 @@
 #!/bin/sh
 set -e
 
-mkdir -p downloads/rows
+mkdir -p socrata/rows
 for viewid in $(./datasets-parse.py); do
-  grep 311\ Service\ Requests "downloads/views/${viewid}.json" > /dev/null && continue
+  # Skip big stuff.
+  grep 311\ Service\ Requests "socrata/views/${viewid}" > /dev/null && continue
   [ 'ym2h-u9dt' = "${viewid}" ] && continue
   [ 's22f-jsd4' = "${viewid}" ] && continue
-  test -e "downloads/rows/${viewid}.csv" || curl "https://data.cityofnewyork.us/api/views/${viewid}/rows.csv?accessType=DOWNLOAD" > "downloads/rows/${viewid}.csv"
+
+  # Download what we don't have.
+  test -e "socrata/rows/${viewid}" || curl "https://data.cityofnewyork.us/api/views/${viewid}/rows.csv?accessType=DOWNLOAD" > "socrata/rows/${viewid}"
 done
