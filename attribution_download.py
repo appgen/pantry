@@ -8,6 +8,5 @@ def get_attribution_links():
     for viewid in get_viewids():
         f = open(os.path.join('socrata', 'views', viewid))
         attribution = json.load(f).get('attributionLink')
-        print attribution
         if attribution:
             yield helpers.get(attribution, cachedir = 'attribution')
