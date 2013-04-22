@@ -7,3 +7,6 @@
 [submodule "collabfinder"]
 	path = collabfinder
 	url = git@github.com:appgen/cache-collabfinder.git
+[submodule "attribution"]
+	path = attribution
+	url = git@github.com:appgen/cache-attribution.git

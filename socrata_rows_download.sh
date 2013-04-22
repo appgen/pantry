@@ -2,7 +2,7 @@
 set -e
 
 mkdir -p socrata/rows
-for viewid in $(./socrata-datasets-viewids.py); do
+for viewid in $(./socrata_datasets_viewids.py); do
   # Skip big stuff.
   grep 311\ Service\ Requests "socrata/views/${viewid}" > /dev/null && continue
   [ 'ym2h-u9dt' = "${viewid}" ] && continue
