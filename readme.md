@@ -35,3 +35,14 @@ We can probably use the API directly in our apps.
 * Wired
 * Gizmodo
 * Sunlight Foundation
+
+## Image source ideas
+We want an image source for app picture backgrounds,
+stock photography, &c. Ideas:
+
+* http://wikimedia.7.x6.nabble.com/can-I-use-the-API-to-search-for-images-in-commons-wikimedia-org-td2549464.html
+* http://meta.wikimedia.org/wiki/User-Agent_policy
+* http://stackoverflow.com/questions/1467336/downloading-images-from-wikimedia-commons
+* https://commons.wikimedia.org/wiki/Commons:API/MediaWiki
+* http://www.mediawiki.org/wiki/API:Allimages
+* http://en.wikipedia.org/w/api.php?action=query&list=allimages&aiprop=url&format=xml&ailimit=10&aifrom=Albert
