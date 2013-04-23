@@ -10,3 +10,6 @@
 [submodule "attribution"]
 	path = attribution
 	url = git@github.com:appgen/cache-attribution.git
+[submodule "manual-questions"]
+	path = manual-questions
+	url = git@github.com:appgen/manual-questions.git
