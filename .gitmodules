@@ -13,3 +13,6 @@
 [submodule "manual-questions"]
 	path = manual-questions
 	url = git@github.com:appgen/manual-questions.git
+[submodule "wikimedia"]
+	path = wikimedia
+	url = git@github.com:appgen/cache-wikimedia.git
