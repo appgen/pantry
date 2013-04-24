@@ -3,6 +3,7 @@
 Download images from Wikimedia Commons Documentation:
 * https://www.mediawiki.org/wiki/API
 * http://wikimedia.7.x6.nabble.com/can-I-use-the-API-to-search-for-images-in-commons-wikimedia-org-td2549464.html
+* http://stackoverflow.com/questions/1467336/downloading-images-from-wikimedia-commons
 '''
 import re
 
@@ -19,6 +20,7 @@ def download(search_term):
     '''
     filenames = _filenames(search_term)
     for filename in filenames:
+        print 'Looking up %s' % filename
         image_url = _image_url(filename)
         helpers.get(image_url, cachedir = 'wikimedia')
 
@@ -37,11 +39,11 @@ def _filenames(search_term):
     }
     r = requests.get(url, params = params, headers = headers)
     if r.status_code != 200:
-        return None
+        raise ValueError('Bad status code: %d' % r.status_code)
 
     results = json.loads(r.text)['query']['search']
     if len(results) == 0:
-        return None
+        raise ValueError('No results')
 
     return [re.sub(r'^File:', '', result['title']) for result in results]
 
@@ -53,3 +55,5 @@ def _image_url(filename):
     urls = response.xpath('//urls/file/text()')
     if len(urls) == 1:
         return urls[0]
+    else:
+        raise ValueError('No file urls')
