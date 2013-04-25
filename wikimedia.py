@@ -6,11 +6,10 @@ Download images from Wikimedia Commons Documentation:
 * http://stackoverflow.com/questions/1467336/downloading-images-from-wikimedia-commons
 '''
 import re
+from urllib import urlencode
 
 import json
 import lxml.etree
-
-import requests
 
 import helpers
 
@@ -20,38 +19,31 @@ def download(search_term):
     '''
     filenames = _filenames(search_term)
     for filename in filenames:
-        print 'Looking up %s' % filename
+        print u'Looking up %s' % filename
         image_url = _image_url(filename)
         helpers.get(image_url, cachedir = 'wikimedia')
 
 def _filenames(search_term):
     'Search for a search term.'
-    url = 'https://commons.wikimedia.org/w/api.php'
-    params = {
+    url = u'https://commons.wikimedia.org/w/api.php?' + urlencode({
         'action': 'query',
         'list': 'search',
         'srnamespace': '6',
         'format': 'json',
-        'srsearch': search_term,
-    }
-    headers = {
-        'User-Agent': 'AppGen (http://www.appgen.me), by Thomas Levine (http://thomaslevine.com) and Ashley Williams',
-    }
-    r = requests.get(url, params = params, headers = headers)
-    if r.status_code != 200:
-        raise ValueError('Bad status code: %d' % r.status_code)
+        'srsearch': search_term.encode('utf-8'),
+    })
+    r = helpers.get(url, cachedir = 'wikimedia')
 
-    results = json.loads(r.text)['query']['search']
+    results = json.load(r)['query']['search']
     if len(results) == 0:
         raise ValueError('No results')
 
     return [re.sub(r'^File:', '', result['title']) for result in results]
 
 def _image_url(filename):
-    url = 'http://toolserver.org/~magnus/commonsapi.php'
-    params = {'image': filename}
-    r = requests.get(url, params = params)
-    response = lxml.etree.fromstring(r.text.encode('utf-8'))
+    url = u'http://toolserver.org/~magnus/commonsapi.php?' + urlencode({u'image': filename.encode('utf-8')})
+    r = helpers.get(url, cachedir = 'wikimedia')
+    response = lxml.etree.parse(r)
     urls = response.xpath('//urls/file/text()')
     if len(urls) == 1:
         return urls[0]
