@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 'Download Wikipedia articles.'
-from urllib2 import urlencode
+from urllib import urlencode
 
 import helpers
 
