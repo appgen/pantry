@@ -11,7 +11,7 @@ _ONLY_LETTERS = re.compile(r'^[a-z]+$', flags = re.IGNORECASE)
 def only_letters(word):
     return re.match(_ONLY_LETTERS, word)
 
-def view_words(viewid):
+def keywords(viewid):
     'Pick the topic words for a particular view.'
     view = json.load(open(os.path.join(VIEWS, viewid)))
 
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     VIEWS = os.path.join('socrata', 'views')
     todos = set()
     for viewid in os.listdir(VIEWS):
-        todos = todos.union(view_words(viewid))
+        todos = todos.union(keywords(viewid))
     for todo in todos:
         print todo
       # wm(todo)
