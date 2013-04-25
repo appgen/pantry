@@ -16,3 +16,6 @@
 [submodule "wikimedia"]
 	path = wikimedia
 	url = git@github.com:appgen/cache-wikimedia.git
+[submodule "wikipedia"]
+	path = wikipedia
+	url = git@github.com:appgen/cache-wikipedia.git
