@@ -25,14 +25,9 @@ def download(search_term):
 
 def _filenames(search_term):
     'Search for a search term.'
-    url = u'https://commons.wikimedia.org/w/api.php?' + urlencode({
-        'action': 'query',
-        'list': 'search',
-        'srnamespace': '6',
-        'format': 'json',
-        'srsearch': search_term.encode('utf-8'),
-    })
-    r = helpers.get(url, cachedir = 'wikimedia')
+    urlbase = u'https://commons.wikimedia.org/w/api.php?action=query&list=search&srnamespace=6&format=json&'
+    searchparam = urlencode({'srsearch': search_term.encode('utf-8')})
+    r = helpers.get(urlbase + searchparam, cachedir = 'wikimedia')
 
     results = json.load(r)['query']['search']
     if len(results) == 0:
