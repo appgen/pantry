@@ -4,9 +4,14 @@
 import os
 import re
 
-from urllib2 import urlopen
-from urllib import urlretrieve
+import urllib
 from urlparse import urljoin
+
+# Set user agent
+class AppGenURLopener(urllib.FancyURLopener):
+    version = 'AppGen (appgen.me), by Thomas Levine (thomaslevine.com) and Ashley Williams'
+
+urllib._urlopener = AppGenURLopener()
 
 def get(url, cachedir = '.'):
     'Download a web file, or load the version from disk.'
