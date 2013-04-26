@@ -6,18 +6,18 @@ set -e
 # -----------------------------------------------
 
 # Get the list of 4x4s
-./socrata-datasets-download.sh
-./socrata-datasets-viewids.py
+./socrata_datasets_download.sh
+./socrata_datasets_viewids.py
 
 # Download metadata
-./socrata-views-download.sh
+./socrata_views_download.sh
 
 # Download spreadsheets
-./socrata-rows-download.sh
+./socrata_rows_download.sh
 
 # -----------------------------------------------
 # Collabfinder
 # -----------------------------------------------
 
 # Download the project pages.
-./collabfinder-project-download.sh
+./collabfinder_project_download.sh
