@@ -5,7 +5,7 @@ import lxml.html
 DIR = os.path.join('socrata', 'datasets')
 
 def get_viewids():
-    pages = filter(lambda page: set(page).issubset(set('0123456789')), os.listdir(DIR))
+    pages = filter(lambda page: set(page.split('-')[-1]).issubset(set('0123456789')), os.listdir(DIR))
     viewids = set()
     for page in pages:
         html = lxml.html.parse(os.path.join(DIR, page))
