@@ -11,3 +11,6 @@ def article(title):
     return helpers.get(urlbase + params, cachedir = 'wikipedia')
 
 # d['query']['pages']['9252']['revisions'][0]['*']
+if __name__ == '__main__':
+    import sys
+    article(sys.argv[1])
