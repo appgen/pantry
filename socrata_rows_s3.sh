@@ -7,5 +7,6 @@ ls socrata/rows/*-*|sed 's/.*\///'|sort > /tmp/downloaded
 
 for viewid in $(diff /tmp/{downloaded,uploaded}|sed 1d|cut -d\  -f2); do
   echo Uploading $viewid
-  s3cmd put "socrata/rows/${viewid}" s3://rows.appgen.me
+  gzip "socrata/rows/${viewid}"
+  s3cmd put --add-header=Content-Encoding:gzip --add-header=Content-Type:text/csv "socrata/rows/${viewid}.gz" s3://rows.appgen.me
 done
