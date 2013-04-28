@@ -4,9 +4,9 @@ set -e
 mkdir -p socrata/rows
 for viewid in $(./socrata_datasets_viewids.py); do
   # Skip big stuff.
-  grep 311\ Service\ Requests "socrata/views/${viewid}" > /dev/null && continue
-  [ 'ym2h-u9dt' = "${viewid}" ] && continue
-  [ 's22f-jsd4' = "${viewid}" ] && continue
+# grep 311\ Service\ Requests "socrata/views/${viewid}" > /dev/null && continue
+# [ 'ym2h-u9dt' = "${viewid}" ] && continue
+# [ 's22f-jsd4' = "${viewid}" ] && continue
 
   # Download what we don't have.
   echo "$viewid"
