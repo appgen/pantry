@@ -15,6 +15,9 @@ set -e
 # Download spreadsheets
 ./socrata_rows_download.sh
 
+# Upload them to S3
+./socrata_rows_s3.sh
+
 # -----------------------------------------------
 # Collabfinder
 # -----------------------------------------------
