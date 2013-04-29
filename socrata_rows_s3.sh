@@ -5,7 +5,7 @@ set -e
 s3cmd ls s3://rows.appgen.me|cut -d/ -f4|sort > /tmp/uploaded
 ls socrata/rows/*-*|sed -e 's/.*\///' -e 's/\.gz//' |sort > /tmp/downloaded 
 
-for viewid in $(diff /tmp/{downloaded,uploaded}|sed 1d|cut -d\  -f2); do
+for viewid in $(diff /tmp/{downloaded,uploaded}|sed '/^[^<[]/ d'|cut -d\  -f2); do
   echo Uploading $viewid
   gzip "socrata/rows/${viewid}"
   if ! s3cmd put --add-header='Content-Encoding:gzip' --mime-type='text/csv' "socrata/rows/${viewid}.gz" s3://rows.appgen.me/${viewid}; then
