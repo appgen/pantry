@@ -10,6 +10,6 @@ for viewid in $(./socrata_datasets_viewids.py); do
 
   # Download what we don't have.
   echo "$viewid"
-  test -e "socrata/rows/${viewid}" || curl "https://data.cityofnewyork.us/api/views/${viewid}/rows.csv?accessType=DOWNLOAD" > "socrata/rows/${viewid}"
-  grep '"message" : "You have exceeded the number of unregistered requests during the last hour. Please specify an app_token in your request"' "socrata/rows/${viewid}" && rm "socrata/rows/${viewid}" && sleep 1h
+  test -e "socrata/rows/${viewid}.gz" || test -e "socrata/rows/${viewid}" || curl "https://data.cityofnewyork.us/api/views/${viewid}/rows.csv?accessType=DOWNLOAD" > "socrata/rows/${viewid}"
+  test -e "socrata/rows/${viewid}" && grep '"message" : "You have exceeded the number of unregistered requests during the last hour. Please specify an app_token in your request"' "socrata/rows/${viewid}" && rm "socrata/rows/${viewid}" && sleep 1h
 done
