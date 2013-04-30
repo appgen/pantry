@@ -2,7 +2,7 @@
 set -e
 # Upload NYC big apps rows from S3.
 
-for viewid in $(s3cmd ls s3://rows.appgen.me|cut -d/ -f4|sort > /tmp/uploaded); do
+for viewid in $(s3cmd ls s3://rows.appgen.me|cut -d/ -f4); do
   echo Retrieving $viewid
   if test -f "socrata/rows/${viewid}"; then
     # Do nothing if we have it.
